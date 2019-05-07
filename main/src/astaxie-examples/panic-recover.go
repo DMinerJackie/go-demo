@@ -14,6 +14,28 @@ func main() {
 	//s2 := string(c)  // 再转换回 string 类型
 	//fmt.Printf("%s",s2)
 
+	m1 := map[int]string{}
+	fmt.Println("len m1:", len(m1))
+	fmt.Println("*", m1[1], "*")
+	if v, ok := m1[1]; ok {
+		fmt.Print("*", v, "*")
+	} else {
+		fmt.Print("not exist")
+	}
+	m1[1] = ""
+	if v, ok := m1[1]; ok {
+		fmt.Print("*", v, "*")
+	} else {
+		fmt.Print("not exist")
+	}
+	fmt.Println("*", m1[1], "*")
+	fmt.Println("len m1:", len(m1))
+
+	s1 := "string"
+	fmt.Println("s1:", s1)
+	//s1[0] = "c"
+	s1 = "helloworld"
+	fmt.Println("s1: ", s1)
 	s := "hello"
 	s = "c" + s[1:] // 字符串虽不能更改，但可进行切片操作
 	fmt.Printf("%s\n", s)
