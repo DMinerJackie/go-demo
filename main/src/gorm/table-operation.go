@@ -38,19 +38,27 @@ func main() {
 	// 如果不设置则gorm默认表名会在后面加s（注意struct的名字要和表名一致，否则会找不到）
 	db.SingularTable(true)
 
-	test := &Test{
-		ID:   3,
-		Name: "jackie",
-		Age:  18,
-	}
-	db.Create(test)
+	//test := &Test{
+	//	ID:   3,
+	//	Name: "hello",
+	//	Age:  18,
+	//}
+	//db.Create(test)
+
+	//db.Delete(test)
+
+	//db.Model(&test).Update("name", "hello")
+
+	//var testResult Test
+	//db.Where("name = ?", "hello").First(&testResult)
+	//fmt.Println("result: ", testResult)
 
 	//db.AutoMigrate(&DqmUserRole{})
 
 	/**
 	表/索引操作
 	*/
-	//// 判定表是否存在
+	//判定表是否存在
 	//var result bool
 	//result = db.HasTable(Test{})
 	//fmt.Println(result)
@@ -281,5 +289,4 @@ func main() {
 		fmt.Println("err: ", err)
 	}
 	fmt.Println("err dqmUserRole: ", dqmUserRole25)
-
 }
