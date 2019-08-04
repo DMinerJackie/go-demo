@@ -116,6 +116,7 @@ func main() {
 	fmt.Println("where dqmUserRoles: ", dqmUserRoles4)
 
 	var dqmUserRole5 []DqmUserRole
+	// like模糊查询
 	db.Where("role_id like ?", "%2").Find(&dqmUserRole5)
 	fmt.Println("where dqmUserRoles: ", dqmUserRole5)
 
@@ -124,10 +125,12 @@ func main() {
 	fmt.Println("where dqmUserRoles: ", dqmUserRole6)
 
 	var dqmUserRole7 DqmUserRole
+	// struct结构查询条件
 	db.Where(&DqmUserRole{RoleId: "1,2", UserId: "1"}).First(&dqmUserRole7)
 	fmt.Println("where dqmUserRole: ", dqmUserRole7)
 
 	var dqmUserRole8 DqmUserRole
+	// map结构查询条件
 	db.Where(map[string]interface{}{"role_id": "1,2", "user_id": "1"}).Find(&dqmUserRole8)
 	fmt.Println("where dqmUserRole: ", dqmUserRole8)
 
