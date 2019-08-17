@@ -233,10 +233,12 @@ func main() {
 	将查询结果存入指定结构
 	*/
 	type Result struct {
-		Id int64
+		Id     int64
+		UserId string
+		Name   string
 	}
 	var results []Result
-	db.Select("id").Where("user_id in (?)", []string{"1", "2"}).Find(&dqmUserRole20).Scan(&results)
+	db.Model(&DqmUserRole{}).Select("id, user_id").Where("user_id in (?)", []string{"1", "2"}).Scan(&results)
 	fmt.Println("ids: ", results)
 
 	/**
