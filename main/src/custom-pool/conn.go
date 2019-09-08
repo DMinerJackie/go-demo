@@ -181,10 +181,13 @@ func (conn *Conn) Release(ctx context.Context) (result bool, err error) {
 	} else {
 		if conn.openCount > 0 {
 			conn.openCount--
-			nextConnIndex := getNextConnIndex(conn)
-			permission := Permission{NextConnIndex: NextConnIndex{nextConnIndex},
-				Content: "PASSED", CreatedAt: nowFunc(), MaxLifeTime: time.Second * 5}
-			conn.freeConns[nextConnIndex] = permission
+
+			if len(conn.freeConns) < conn.maxIdle { // 确保连接池大小不会超过maxIdle
+				nextConnIndex := getNextConnIndex(conn)
+				permission := Permission{NextConnIndex: NextConnIndex{nextConnIndex},
+					Content: "PASSED", CreatedAt: nowFunc(), MaxLifeTime: time.Second * 5}
+				conn.freeConns[nextConnIndex] = permission
+			}
 		}
 		conn.lock.Unlock()
 	}
