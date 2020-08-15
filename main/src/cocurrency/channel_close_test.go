@@ -1,0 +1,45 @@
+package cocurrency
+
+import (
+	"fmt"
+	"sync"
+	"testing"
+)
+
+func dataProducer(ch chan int, wg *sync.WaitGroup) {
+	go func() {
+		for i := 0; i < 10; i++ {
+			fmt.Println("producer: ", i)
+			ch <- i
+		}
+		close(ch)
+		wg.Done()
+	}()
+}
+
+func dataReceiver(ch chan int, wg *sync.WaitGroup) {
+	go func() {
+		for i := 0; i < 10; i++ {
+			if data, ok := <-ch; ok {
+				fmt.Println("receiver: ", data)
+				fmt.Println(data)
+			} else {
+				break
+			}
+		}
+		wg.Done()
+	}()
+}
+
+func TestChannelOpenClose(t *testing.T) {
+	var wg sync.WaitGroup
+	ch := make(chan int)
+	wg.Add(1)
+	dataProducer(ch, &wg)
+
+	wg.Add(1)
+	dataReceiver(ch, &wg)
+	//wg.Add(1)
+	//dataReceiver(ch, &wg)
+	wg.Wait()
+}
