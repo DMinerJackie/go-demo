@@ -9,6 +9,8 @@ require (
 	github.com/gin-gonic/gin v1.4.0
 	github.com/go-playground/universal-translator v0.17.0 // indirect
 	github.com/go-sql-driver/mysql v1.4.1
+	github.com/gogo/protobuf v1.2.0
+	github.com/golang/protobuf v1.3.2
 	github.com/google/wire v0.3.0
 	github.com/jinzhu/gorm v1.9.11
 	github.com/kr/pretty v0.1.0 // indirect
